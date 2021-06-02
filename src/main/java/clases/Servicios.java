@@ -18,8 +18,8 @@ public class Servicios extends Producto{
     private LocalDate fechaComienzo;
     private LocalDate fechaDeFin;
 
-    public Servicios(double horas, LocalDate fechaComienzo, LocalDate fechaDeFin, String referencia, String cantidad, String nombre) {
-        super(referencia, cantidad, nombre);
+    public Servicios(double horas, LocalDate fechaComienzo, LocalDate fechaDeFin, String referencia, String cantidad, String nombre, String precio) {
+        super(referencia, cantidad, nombre, precio);
         this.horas = horas;
         this.fechaComienzo = fechaComienzo;
         this.fechaDeFin = fechaDeFin;
@@ -51,10 +51,10 @@ public class Servicios extends Producto{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.horas) ^ (Double.doubleToLongBits(this.horas) >>> 32));
-        hash = 97 * hash + Objects.hashCode(this.fechaComienzo);
-        hash = 97 * hash + Objects.hashCode(this.fechaDeFin);
+        int hash = 7;
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.horas) ^ (Double.doubleToLongBits(this.horas) >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.fechaComienzo);
+        hash = 53 * hash + Objects.hashCode(this.fechaDeFin);
         return hash;
     }
 
@@ -86,6 +86,6 @@ public class Servicios extends Producto{
     public String toString() {
         return "Servicios{" + "horas=" + horas + ", fechaComienzo=" + fechaComienzo + ", fechaDeFin=" + fechaDeFin + '}';
     }
-    
-    
+
+   
 }

@@ -16,8 +16,8 @@ public class Articulos extends Producto{
     private String peso;
     private LocalDate fechaDeCreacion;
 
-    public Articulos(String peso, LocalDate fechaDeCreacion, String referencia, String cantidad, String nombre) {
-        super(referencia, cantidad, nombre);
+    public Articulos(String peso, LocalDate fechaDeCreacion, String referencia, String cantidad, String nombre, String precio) {
+        super(referencia, cantidad, nombre, precio);
         this.peso = peso;
         this.fechaDeCreacion = fechaDeCreacion;
     }
@@ -40,9 +40,9 @@ public class Articulos extends Producto{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.peso);
-        hash = 67 * hash + Objects.hashCode(this.fechaDeCreacion);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.peso);
+        hash = 97 * hash + Objects.hashCode(this.fechaDeCreacion);
         return hash;
     }
 
@@ -72,6 +72,7 @@ public class Articulos extends Producto{
         return "Articulos{" + "peso=" + peso + ", fechaDeCreacion=" + fechaDeCreacion + '}';
     }
 
+    
   
     
 }

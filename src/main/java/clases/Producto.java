@@ -15,11 +15,13 @@ public class Producto {
     private String referencia;
     private String cantidad;
     private String nombre;
+    private String precio;
 
-    public Producto(String referencia, String cantidad, String nombre) {
+    public Producto(String referencia, String cantidad, String nombre, String precio) {
         this.referencia = referencia;
         this.cantidad = cantidad;
         this.nombre = nombre;
+        this.precio = precio;
     }
 
     public String getReferencia() {
@@ -46,12 +48,21 @@ public class Producto {
         this.nombre = nombre;
     }
 
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.referencia);
-        hash = 89 * hash + Objects.hashCode(this.cantidad);
-        hash = 89 * hash + Objects.hashCode(this.nombre);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.referencia);
+        hash = 67 * hash + Objects.hashCode(this.cantidad);
+        hash = 67 * hash + Objects.hashCode(this.nombre);
+        hash = 67 * hash + Objects.hashCode(this.precio);
         return hash;
     }
 
@@ -76,13 +87,18 @@ public class Producto {
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
+        if (!Objects.equals(this.precio, other.precio)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "referencia=" + referencia + ", cantidad=" + cantidad + ", nombre=" + nombre + '}';
+        return "Producto{" + "referencia=" + referencia + ", cantidad=" + cantidad + ", nombre=" + nombre + ", precio=" + precio + '}';
     }
+
+    
 
     
 }
