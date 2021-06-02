@@ -21,58 +21,17 @@ public class Pedido {
     private LocalDate fechaPedido;
     private String numPedido;
     private FormaPago pago;
+    private Cliente cliente;
     private ArrayList<Producto> listaProductos;
 
-    public Pedido(LocalDate fechaPedido, String numPedido, FormaPago pago, ArrayList<Producto> listaProductos) {
+    public Pedido(LocalDate fechaPedido, FormaPago pago, Cliente cliente, ArrayList<Producto> listaProductos) {
         this.fechaPedido = fechaPedido;
         this.numPedido = numPedido();
         this.pago = pago;
+        this.cliente = cliente;
         this.listaProductos = listaProductos;
     }
 
-    @Override
-    public String toString() {
-        return "Pedido{" + "fechaPedido=" + fechaPedido + ", numPedido=" + numPedido + ", pago=" + pago + ", listaProductos=" + listaProductos + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.fechaPedido);
-        hash = 53 * hash + Objects.hashCode(this.numPedido);
-        hash = 53 * hash + Objects.hashCode(this.pago);
-        hash = 53 * hash + Objects.hashCode(this.listaProductos);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Pedido other = (Pedido) obj;
-        if (!Objects.equals(this.numPedido, other.numPedido)) {
-            return false;
-        }
-        if (!Objects.equals(this.fechaPedido, other.fechaPedido)) {
-            return false;
-        }
-        if (this.pago != other.pago) {
-            return false;
-        }
-        if (!Objects.equals(this.listaProductos, other.listaProductos)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
     
 
     private String numPedido() {
@@ -120,6 +79,14 @@ public class Pedido {
         this.pago = pago;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
@@ -128,6 +95,53 @@ public class Pedido {
         this.listaProductos = listaProductos;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.fechaPedido);
+        hash = 67 * hash + Objects.hashCode(this.numPedido);
+        hash = 67 * hash + Objects.hashCode(this.pago);
+        hash = 67 * hash + Objects.hashCode(this.cliente);
+        hash = 67 * hash + Objects.hashCode(this.listaProductos);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pedido other = (Pedido) obj;
+        if (!Objects.equals(this.numPedido, other.numPedido)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaPedido, other.fechaPedido)) {
+            return false;
+        }
+        if (this.pago != other.pago) {
+            return false;
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaProductos, other.listaProductos)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "fechaPedido=" + fechaPedido + ", numPedido=" + numPedido + ", pago=" + pago + ", cliente=" + cliente + ", listaProductos=" + listaProductos + '}';
+    }
+
+   
     
 
 }
