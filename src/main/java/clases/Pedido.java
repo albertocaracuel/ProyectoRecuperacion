@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -62,6 +63,40 @@ public class Pedido {
 
     public void setNumPedido(String numPedido) {
         this.numPedido = numPedido;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.fechaPedido);
+        hash = 59 * hash + Objects.hashCode(this.numPedido);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pedido other = (Pedido) obj;
+        if (!Objects.equals(this.numPedido, other.numPedido)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaPedido, other.fechaPedido)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "fechaPedido=" + fechaPedido + ", numPedido=" + numPedido + '}';
     }
 
 }
