@@ -14,10 +14,12 @@ import java.util.Objects;
 public class Producto {
     private String referencia;
     private String cantidad;
+    private String nombre;
 
-    public Producto(String referencia, String cantidad) {
+    public Producto(String referencia, String cantidad, String nombre) {
         this.referencia = referencia;
         this.cantidad = cantidad;
+        this.nombre = nombre;
     }
 
     public String getReferencia() {
@@ -36,11 +38,20 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.referencia);
-        hash = 83 * hash + Objects.hashCode(this.cantidad);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.referencia);
+        hash = 89 * hash + Objects.hashCode(this.cantidad);
+        hash = 89 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
 
@@ -62,13 +73,16 @@ public class Producto {
         if (!Objects.equals(this.cantidad, other.cantidad)) {
             return false;
         }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "referencia=" + referencia + ", cantidad=" + cantidad + '}';
+        return "Producto{" + "referencia=" + referencia + ", cantidad=" + cantidad + ", nombre=" + nombre + '}';
     }
-    
+
     
 }

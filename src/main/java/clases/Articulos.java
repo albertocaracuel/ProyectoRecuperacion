@@ -13,23 +13,13 @@ import java.util.Objects;
  * @author alberto
  */
 public class Articulos extends Producto{
-    private String nombre;
     private String peso;
     private LocalDate fechaDeCreacion;
 
-    public Articulos(String nombre, String peso, LocalDate fechaDeCreacion, String referencia, String cantidad) {
-        super(referencia, cantidad);
-        this.nombre = nombre;
+    public Articulos(String peso, LocalDate fechaDeCreacion, String referencia, String cantidad, String nombre) {
+        super(referencia, cantidad, nombre);
         this.peso = peso;
         this.fechaDeCreacion = fechaDeCreacion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getPeso() {
@@ -51,9 +41,8 @@ public class Articulos extends Producto{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.nombre);
-        hash = 17 * hash + Objects.hashCode(this.peso);
-        hash = 17 * hash + Objects.hashCode(this.fechaDeCreacion);
+        hash = 67 * hash + Objects.hashCode(this.peso);
+        hash = 67 * hash + Objects.hashCode(this.fechaDeCreacion);
         return hash;
     }
 
@@ -69,9 +58,6 @@ public class Articulos extends Producto{
             return false;
         }
         final Articulos other = (Articulos) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
         if (!Objects.equals(this.peso, other.peso)) {
             return false;
         }
@@ -83,8 +69,9 @@ public class Articulos extends Producto{
 
     @Override
     public String toString() {
-        return "Articulos{" + "nombre=" + nombre + ", peso=" + peso + ", fechaDeCreacion=" + fechaDeCreacion + '}';
+        return "Articulos{" + "peso=" + peso + ", fechaDeCreacion=" + fechaDeCreacion + '}';
     }
-    
+
+  
     
 }
