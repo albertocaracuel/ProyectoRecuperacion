@@ -7,12 +7,15 @@ package clases;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  *
  * @author alberto
  */
 public class Empresa {
+
+    private Scanner sc = new Scanner(System.in);
     private String cif;
     private String nombreEmpresa;
     private ArrayList<Cliente> listaClientes;
@@ -112,8 +115,16 @@ public class Empresa {
     public String toString() {
         return "Empresa{" + "cif=" + cif + ", nombreEmpresa=" + nombreEmpresa + ", listaClientes=" + listaClientes + ", listaPedidos=" + listaPedidos + ", listaProductos=" + listaProductos + '}';
     }
-    
-    
-    
-    
+
+    public void DarDeAlta() {
+        System.out.println("Nombre del cliente");
+        String nombre = sc.nextLine();
+
+        System.out.println("Direccion del cliente");
+        String direccion = sc.nextLine();
+
+        Cliente nuevo = new Cliente(nombre, direccion);
+        
+        listaClientes.add(nuevo);
+    }
 }

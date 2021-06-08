@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Formatter;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -18,6 +19,7 @@ import java.util.Random;
  */
 public class Pedido {
 
+    private Scanner sc = new Scanner(System.in);
     private LocalDate fechaPedido;
     private String numPedido;
     private FormaPago pago;
@@ -31,8 +33,6 @@ public class Pedido {
         this.cliente = cliente;
         this.listaProductos = listaProductos;
     }
-
-    
 
     private String numPedido() {
         Random random = new Random();
@@ -49,8 +49,8 @@ public class Pedido {
 
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
-        
-        pedido+= "/" + String.valueOf(cal);
+
+        pedido += "/" + String.valueOf(cal);
 
         return pedido;
     }
@@ -141,7 +141,71 @@ public class Pedido {
         return "Pedido{" + "fechaPedido=" + fechaPedido + ", numPedido=" + numPedido + ", pago=" + pago + ", cliente=" + cliente + ", listaProductos=" + listaProductos + '}';
     }
 
-   
-    
+    public void imprimirPedido() {
+
+    }
+
+    public Pedido realizarPedido(Empresa o) {
+
+        Pedido nuevo = new Pedido(LocalDate.now(), formaDePago(), meterCliente(o), meterProductos( o));
+
+        return nuevo;
+    }
+
+    private FormaPago formaDePago() {
+        System.out.println("¿Como quiere pagarlo?\n" + "tarjeta o transferencia");
+        String pago = sc.nextLine();
+
+        switch (pago.toUpperCase()) {
+            case "TARJETA":
+                return FormaPago.TARJETA;
+
+            case "TRANSFERENCIA":
+                return FormaPago.TRANSFERENCIA;
+
+        }
+        return null;
+
+    }
+
+    private Cliente meterCliente(Empresa o) {
+        System.out.println(o.getListaClientes().toString());
+        System.out.println("¿Que cliente quiere meter en el pedido?");
+        int num = sc.nextInt();
+
+        for (Cliente e : o.getListaClientes()) {
+            if (e.equals(num)) {
+                return e;
+            }
+        }
+
+        return null;
+    }
+
+    private ArrayList<Producto> meterProductos(Empresa o) {
+        ArrayList<Producto> lista = new ArrayList<>();
+        for (Producto e : o.getListaProductos()) {
+            System.out.println(e);
+        }
+
+        System.out.println("¿Cuantos productos diferente tiene el pedido?");
+        int num = sc.nextInt();
+
+        int contador = 0;
+        do {
+                System.out.println("Introduzca la referencia del producto");
+                String ref= sc.nextLine();
+                System.out.println("Introduzca la cantidad del producto");
+                String cant= sc.nextLine();
+            for (Producto u : o.getListaProductos()) {
+                if(u.getReferencia().contains(ref)){
+                    u.setCantidad(cant);
+                    lista.add(u);
+                }
+            }
+
+        } while (contador != num);
+        return lista;
+    }
 
 }
