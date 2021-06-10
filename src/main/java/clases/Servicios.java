@@ -25,6 +25,9 @@ public class Servicios extends Producto{
         this.fechaDeFin = fechaDeFin;
     }
 
+    Servicios() {
+    }
+
     public double getHoras() {
         return horas;
     }

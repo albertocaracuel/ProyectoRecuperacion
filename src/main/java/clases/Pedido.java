@@ -5,7 +5,11 @@
  */
 package clases;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Formatter;
@@ -147,8 +151,8 @@ public class Pedido {
 
     public Pedido realizarPedido(Empresa o) {
 
-        Pedido nuevo = new Pedido(LocalDate.now(), formaDePago(), meterCliente(o), meterProductos( o));
-
+        Pedido nuevo = new Pedido(LocalDate.now(), formaDePago(), meterCliente(o), meterProductos(o));
+        o.getListaPedidos().add(nuevo);
         return nuevo;
     }
 
@@ -185,7 +189,7 @@ public class Pedido {
     private ArrayList<Producto> meterProductos(Empresa o) {
         ArrayList<Producto> lista = new ArrayList<>();
         for (Producto e : o.getListaProductos()) {
-            System.out.println(e);
+            System.out.println(e.toString());
         }
 
         System.out.println("¿Cuantos productos diferente tiene el pedido?");
@@ -193,12 +197,12 @@ public class Pedido {
 
         int contador = 0;
         do {
-                System.out.println("Introduzca la referencia del producto");
-                String ref= sc.nextLine();
-                System.out.println("Introduzca la cantidad del producto");
-                String cant= sc.nextLine();
+            System.out.println("Introduzca la referencia del producto");
+            String ref = sc.nextLine();
+            System.out.println("Introduzca la cantidad del producto");
+            String cant = sc.nextLine();
             for (Producto u : o.getListaProductos()) {
-                if(u.getReferencia().contains(ref)){
+                if (u.getReferencia().contains(ref)) {
                     u.setCantidad(cant);
                     lista.add(u);
                 }
@@ -206,6 +210,37 @@ public class Pedido {
 
         } while (contador != num);
         return lista;
+    }
+
+    public void imprimirPedido(Pedido o, String idFichero) {
+
+        // Si se utiliza el constructor FileWriter(idFichero, true) entonces se anexa información
+        // al final del fichero idFichero
+        // Estructura try-with-resources. Instancia el objeto con el fichero a escribir
+        // y se encarga de cerrar el recurso "flujo" una vez finalizadas las operaciones
+        try ( BufferedWriter flujo = new BufferedWriter(new FileWriter(idFichero))) {
+            flujo.write("Fecha: " + String.valueOf(LocalDate.now()) + "\n"
+                    + "Cliente: " + o.getCliente().getNombre() + "\t" + "nº" + o.getNumPedido() + "\n"
+                    + "Direccion: " + o.getCliente().getDireccion() + "\n"
+                    + "Producto \t" + "Cantidad \t" + "Precio");
+
+            for (Producto e : o.getListaProductos()) {
+
+                flujo.write(e.getNombre() + e.getCantidad() + e.getPrecio());
+
+            }
+            
+            flujo.write("Forma de pago" + o.getPago());
+            // Metodo newLine() añade salto de línea después de cada fila
+            flujo.newLine();
+
+            // Metodo fluh() guarda cambios en disco 
+            flujo.flush();
+            System.out.println("Pedido " + idFichero + " impreso correctamente.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

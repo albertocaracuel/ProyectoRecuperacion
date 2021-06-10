@@ -22,6 +22,9 @@ public class Cliente {
         this.numCliente=numero();
        
     }
+
+    Cliente() {
+    }
     
     private int numero(){
         

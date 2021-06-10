@@ -5,6 +5,10 @@
  */
 package clases;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -124,7 +128,102 @@ public class Empresa {
         String direccion = sc.nextLine();
 
         Cliente nuevo = new Cliente(nombre, direccion);
-        
+
         listaClientes.add(nuevo);
     }
+
+    public void añadirClientesCSV(String url) {
+
+        String idFichero = url;
+
+        // Variables para guardar los datos que se van leyendo
+        String[] tokens;
+        String linea;
+
+        System.out.println("Leyendo el fichero: " + idFichero);
+
+        // Inicialización del flujo "datosFichero" en función del archivo llamado "idFichero"
+        // Estructura try-with-resources. Permite cerrar los recursos una vez finalizadas
+        // las operaciones con el archivo
+        try ( Scanner datosFichero = new Scanner(new File(idFichero), "UTF-8")) {
+
+            while (datosFichero.hasNextLine()) {
+                // Guarda la línea completa en un String
+                linea = datosFichero.nextLine();
+                // Se guarda en el array de String cada elemento de la
+                // línea en función del carácter separador de campos del fichero CSV
+                tokens = linea.split(";");
+
+                Cliente nuevo = new Cliente();
+                nuevo.setDireccion(tokens[1]);
+                nuevo.setNombre(tokens[0]);
+                nuevo.setNumCliente(Integer.parseInt(tokens[2]));
+
+                listaClientes.add(nuevo);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void añadirProductosCSV(String url) {
+
+        String idFichero = url;
+
+        // Variables para guardar los datos que se van leyendo
+        String[] tokens;
+        String linea;
+
+        System.out.println("Leyendo el fichero: " + idFichero);
+
+        // Inicialización del flujo "datosFichero" en función del archivo llamado "idFichero"
+        // Estructura try-with-resources. Permite cerrar los recursos una vez finalizadas
+        // las operaciones con el archivo
+        try ( Scanner datosFichero = new Scanner(new File(idFichero), "UTF-8")) {
+
+            while (datosFichero.hasNextLine()) {
+                // Guarda la línea completa en un String
+                linea = datosFichero.nextLine();
+                // Se guarda en el array de String cada elemento de la
+                // línea en función del carácter separador de campos del fichero CSV
+                tokens = linea.split(";");
+
+                LocalDate localDate1 = LocalDate.parse(tokens[1].replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate localDate2 = LocalDate.parse(tokens[1].replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate localDate3 = LocalDate.parse(tokens[2].replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                if (tokens.length == 6) {
+
+                    Articulos nuevo = new Articulos();
+
+                    nuevo.setCantidad(tokens[3]);
+                    nuevo.setFechaDeCreacion(localDate1);
+                    nuevo.setNombre(tokens[4]);
+                    nuevo.setPeso(tokens[0]);
+                    nuevo.setReferencia(tokens[2]);
+                    nuevo.setPrecio(tokens[5]);
+
+                    listaProductos.add(nuevo);
+                } else {
+                    Servicios nuevo = new Servicios();
+
+                    nuevo.setCantidad(tokens[4]);
+                    nuevo.setFechaComienzo(localDate2);
+                    nuevo.setFechaDeFin(localDate3);
+                    nuevo.setHoras(Double.parseDouble(tokens[0]));
+                    nuevo.setNombre(tokens[5]);
+                    nuevo.setPrecio(tokens[6]);
+                    nuevo.setReferencia(tokens[3]);
+
+                    listaProductos.add(nuevo);
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    
+    
 }

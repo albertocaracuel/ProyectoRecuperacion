@@ -24,6 +24,9 @@ public class Producto {
         this.precio = precio;
     }
 
+    Producto() {
+    }
+
     public String getReferencia() {
         return referencia;
     }

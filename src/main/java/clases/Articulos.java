@@ -22,6 +22,9 @@ public class Articulos extends Producto{
         this.fechaDeCreacion = fechaDeCreacion;
     }
 
+    Articulos() {
+    }
+
     public String getPeso() {
         return peso;
     }
