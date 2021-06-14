@@ -178,7 +178,7 @@ public class Pedido {
         int num = sc.nextInt();
 
         for (Cliente e : o.getListaClientes()) {
-            if (e.equals(num)) {
+            if (e.getNumCliente()==num) {
                 return e;
             }
         }
@@ -226,7 +226,7 @@ public class Pedido {
 
             for (Producto e : o.getListaProductos()) {
 
-                flujo.write(e.getNombre() + e.getCantidad() + e.getPrecio());
+                flujo.write(e.getNombre()+"\t" + e.getCantidad()+"\t" + e.getPrecio());
 
             }
             

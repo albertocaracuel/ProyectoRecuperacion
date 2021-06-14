@@ -22,7 +22,7 @@ public class Articulos extends Producto{
         this.fechaDeCreacion = fechaDeCreacion;
     }
 
-    Articulos() {
+    public Articulos() {
     }
 
     public String getPeso() {
@@ -72,7 +72,9 @@ public class Articulos extends Producto{
 
     @Override
     public String toString() {
-        return "Articulos{" + "peso=" + peso + ", fechaDeCreacion=" + fechaDeCreacion + '}';
+         String arti;
+        arti=super.toString();
+        return arti + "," + peso + "," + fechaDeCreacion ;
     }
 
     

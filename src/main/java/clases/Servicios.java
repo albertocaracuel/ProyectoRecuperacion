@@ -25,7 +25,7 @@ public class Servicios extends Producto{
         this.fechaDeFin = fechaDeFin;
     }
 
-    Servicios() {
+    public Servicios() {
     }
 
     public double getHoras() {
@@ -87,7 +87,9 @@ public class Servicios extends Producto{
 
     @Override
     public String toString() {
-        return "Servicios{" + "horas=" + horas + ", fechaComienzo=" + fechaComienzo + ", fechaDeFin=" + fechaDeFin + '}';
+        String arti;
+        arti=super.toString();
+        return arti + "," + horas + "," + fechaComienzo + "," + fechaDeFin ;
     }
 
    

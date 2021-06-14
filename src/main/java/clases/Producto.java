@@ -24,7 +24,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    Producto() {
+    public Producto() {
     }
 
     public String getReferencia() {
@@ -98,7 +98,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "referencia=" + referencia + ", cantidad=" + cantidad + ", nombre=" + nombre + ", precio=" + precio + '}';
+        return   referencia + "," + cantidad + "," + nombre + "," + precio ;
     }
 
     

@@ -23,7 +23,8 @@ public class Cliente {
        
     }
 
-    Cliente() {
+   public Cliente() {
+       this.numCliente=numero();
     }
     
     private int numero(){
@@ -54,7 +55,7 @@ public class Cliente {
     }
 
     public void setNumCliente(int numCliente) {
-        this.numCliente = numCliente;
+        this.numCliente = numero();;
     }
 
     @Override

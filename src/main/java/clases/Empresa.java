@@ -5,9 +5,16 @@
  */
 package clases;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -32,6 +39,7 @@ public class Empresa {
         this.listaClientes = new ArrayList<>();
         this.listaPedidos = new ArrayList<>();
         this.listaProductos = new ArrayList<>();
+        crearDirectorio("./backup");
     }
 
     public String getCif() {
@@ -157,7 +165,6 @@ public class Empresa {
                 Cliente nuevo = new Cliente();
                 nuevo.setDireccion(tokens[1]);
                 nuevo.setNombre(tokens[0]);
-                nuevo.setNumCliente(Integer.parseInt(tokens[2]));
 
                 listaClientes.add(nuevo);
             }
@@ -224,6 +231,32 @@ public class Empresa {
         }
 
     }
-    
-    
+    //metodo que crea un directorio
+
+    private static void crearDirectorio(String directorio) {
+        Path directory = Paths.get(directorio);
+        try {
+            Files.createDirectory(directory);
+        } catch (IOException e) {
+            System.out.println("Problema creando el directorio.");
+            System.out.println(e.toString());
+        }
+
+    }
+
+    public void crearCopiaDeSeguridad(Empresa o) throws IOException {
+
+        String fecha = String.valueOf(LocalDateTime.now());
+
+        crearDirectorio("./backup/" + fecha);
+        ObjectMapper mapeador = new ObjectMapper();
+
+        mapeador.configure(SerializationFeature.INDENT_OUTPUT, true);
+
+        // Escribe en un fichero JSON 
+        mapeador.writeValue(new File("./backup/" + fecha + "copiaClientes.json"), o.getListaClientes());
+
+        mapeador.writeValue(new File("./backup/" + fecha + "copiaProductos.json"), o.getListaProductos());
+    }
+
 }
