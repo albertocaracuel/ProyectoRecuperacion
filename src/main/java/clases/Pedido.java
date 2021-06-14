@@ -222,11 +222,12 @@ public class Pedido {
             flujo.write("Fecha: " + String.valueOf(LocalDate.now()) + "\n"
                     + "Cliente: " + o.getCliente().getNombre() + "\t" + "nº" + o.getNumPedido() + "\n"
                     + "Direccion: " + o.getCliente().getDireccion() + "\n"
-                    + "Producto \t" + "Cantidad \t" + "Precio");
+                    + "Producto\t" + "Cantidad\t" + "Precio\t" + "Total");
 
             for (Producto e : o.getListaProductos()) {
-
-                flujo.write(e.getNombre()+"\t" + e.getCantidad()+"\t" + e.getPrecio());
+                int total= Integer.parseInt(e.getPrecio()) * Integer.parseInt(e.getCantidad());
+                String total1= String.valueOf(total);
+                flujo.write(e.getNombre()+"\t" + e.getCantidad()+"\t" + e.getPrecio()+"\t" + total1);
 
             }
             
