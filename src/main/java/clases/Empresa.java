@@ -140,7 +140,7 @@ public class Empresa {
         listaClientes.add(nuevo);
     }
 
-    public void añadirClientesCSV(String url) {
+    public void añadirClientesCSV(String url, Empresa o) {
 
         String idFichero = url;
 
@@ -166,7 +166,7 @@ public class Empresa {
                 nuevo.setDireccion(tokens[1]);
                 nuevo.setNombre(tokens[0]);
 
-                listaClientes.add(nuevo);
+                o.getListaClientes().add(nuevo);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -174,7 +174,7 @@ public class Empresa {
 
     }
 
-    public void añadirProductosCSV(String url) {
+    public void añadirProductosCSV(String url, Empresa o) {
 
         String idFichero = url;
 
@@ -210,7 +210,7 @@ public class Empresa {
                     nuevo.setReferencia(tokens[2]);
                     nuevo.setPrecio(tokens[5]);
 
-                    listaProductos.add(nuevo);
+                    o.getListaProductos().add(nuevo);
                 } else {
                     Servicios nuevo = new Servicios();
 
@@ -222,7 +222,7 @@ public class Empresa {
                     nuevo.setPrecio(tokens[6]);
                     nuevo.setReferencia(tokens[3]);
 
-                    listaProductos.add(nuevo);
+                    o.getListaProductos().add(nuevo);
                 }
 
             }
