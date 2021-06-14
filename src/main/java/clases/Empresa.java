@@ -199,7 +199,7 @@ public class Empresa {
                 LocalDate localDate1 = LocalDate.parse(tokens[1].replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 LocalDate localDate2 = LocalDate.parse(tokens[1].replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 LocalDate localDate3 = LocalDate.parse(tokens[2].replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                if (tokens.length == 6) {
+                if (tokens.length <= 6) {
 
                     Articulos nuevo = new Articulos();
 
@@ -257,6 +257,43 @@ public class Empresa {
         mapeador.writeValue(new File("./backup/" + fecha + "copiaClientes.json"), o.getListaClientes());
 
         mapeador.writeValue(new File("./backup/" + fecha + "copiaProductos.json"), o.getListaProductos());
+        
+         mapeador.writeValue(new File("./backup/" + fecha + "copiaPedidos.json"), o.getListaPedidos());
+    }
+    
+    private static void mostrarCarpetas(String ruta){
+         File f = new File(ruta);
+        if (f.exists()) {
+            // Obtiene los ficheros y directorios dentro de f y los
+            // devuelve en un array
+            File[] ficheros = f.listFiles();
+            for (File carpeta : ficheros) {
+                System.out.println(carpeta.getName());
+            }
+        } else {
+            System.out.println("El directorio a listar no existe");
+        }
+    }
+    public void restaurarCopiaDeSeguridad() throws IOException{
+        mostrarCarpetas("./backup");
+        
+        System.out.println("Introduzca el nombre de la carpeta que quiere restaurar");
+        String nom=sc.nextLine();
+        
+        
+        ObjectMapper mapeador = new ObjectMapper();
+        
+         listaPedidos.clear();
+         listaPedidos= mapeador.readValue(new File("./backup/" + nom + "copiaPedidos.json"),
+                    mapeador.getTypeFactory().constructCollectionType(ArrayList.class, Pedido.class));
+        
+         listaProductos.clear();
+         listaProductos= mapeador.readValue(new File("./backup/" + nom + "copiaProductos.json"),
+                    mapeador.getTypeFactory().constructCollectionType(ArrayList.class, Producto.class));
+        
+         listaClientes.clear();
+         listaClientes= mapeador.readValue(new File("./backup/" + nom + "copiaClientes.json"),
+                    mapeador.getTypeFactory().constructCollectionType(ArrayList.class, Cliente.class));
     }
 
 }
