@@ -265,9 +265,87 @@ public class ModInsDel {
         for (Producto e : o.getListaProductos()) {
             if (!ref.equalsIgnoreCase(e.getReferencia())) {
                 if (e instanceof Articulos) {
+                    System.out.println("¿Que quiere modificar?\n"
+                            + "cantidad\n" + "fecha\n" + "nombre\n" + "peso\n" + "ref\n" + "precio");
+                    String opcion = sc.nextLine();
+                    switch (opcion.toUpperCase()) {
+                        case "CANTIDAD":
+                            System.out.println("Introduce la cantidad de productos");
+                            String cant = sc.nextLine();
+                            ((Articulos) e).setCantidad(cant);
+                            break;
+                        case "FECHA":
+                            System.out.println("Introduce la fecha del producto");
+                            String fec = sc.nextLine();
+                            LocalDate localDate1 = LocalDate.parse(fec.replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                            ((Articulos) e).setFechaDeCreacion(localDate1);
+                            break;
+                        case "NOMBRE":
+                            System.out.println("Introduce el nombre del producto");
+                            String nom = sc.nextLine();
+                            ((Articulos) e).setNombre(nom);
+                            break;
+                        case "PESO":
+                            System.out.println("Introduce el peso del producto");
+                            String peso = sc.nextLine();
+                            ((Articulos) e).setPeso(peso);
+                            break;
+                        case "REF":
+                            System.out.println("Introduce la referencia del producto");
+                            String ref1 = sc.nextLine();
+                            ((Articulos) e).setReferencia(ref);
+                            break;
+                        case "PRECIO":
+                            System.out.println("Introduce el precio del producto");
+                            String prec = sc.nextLine();
+                            ((Articulos) e).setPrecio(prec);
+                            break;
 
+                    }
                 } else if (e instanceof Servicios) {
+                    System.out.println("¿Que quiere modificar?\n"
+                            + "cantidad\n" + "fecha de inicio\n" + "nombre\n" + "ref\n" + "precio\n" + "fecha de fin\n" + "duracion");
+                    String opcion = sc.nextLine();
+                    switch (opcion.toUpperCase()) {
 
+                        case "CANTIDAD":
+                            System.out.println("Introduce la cantidad de productos");
+                            String cant1 = sc.nextLine();
+                            ((Servicios) e).setCantidad(cant1);
+                            break;
+                        case "FECHA DE INICIO":
+                            System.out.println("Introduce la fecha de inicio del producto");
+                            String fec1 = sc.nextLine();
+                            LocalDate localDate2 = LocalDate.parse(fec1.replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                            ((Servicios) e).setFechaComienzo(localDate2);
+                            break;
+                        case "FECHA DE FIN":
+                            System.out.println("Introduce la fecha de fin del producto");
+                            String fec2 = sc.nextLine();
+                            LocalDate localDate3 = LocalDate.parse(fec2.replaceAll("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                            ((Servicios) e).setFechaDeFin(localDate3);
+                            break;
+                        case "DURACION":
+                            System.out.println("Introduce las horas d duracion del producto");
+                            String hora = sc.nextLine();
+                            ((Servicios) e).setHoras(Double.parseDouble(hora));
+                            break;
+                        case "NOMBRE":
+                            System.out.println("Introduce el nombre del producto");
+                            String nom1 = sc.nextLine();
+                            ((Servicios) e).setNombre(nom1);
+                            break;
+                        case "PRECIO":
+                            System.out.println("Introduce el precio del producto");
+                            String prec1 = sc.nextLine();
+                            ((Servicios) e).setPrecio(prec1);
+                            break;
+                        case "REFERENCIA":
+                            System.out.println("Introduce la referencia del producto");
+                            String ref1 = sc.nextLine();
+                            ((Servicios) e).setReferencia(ref1);
+                            break;
+                    }
                 }
             }
         }

@@ -142,11 +142,16 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "fechaPedido=" + fechaPedido + ", numPedido=" + numPedido + ", pago=" + pago + ", cliente=" + cliente + ", listaProductos=" + listaProductos + '}';
+        return "Pedido{" + "fechaPedido=" + fechaPedido + ", numPedido=" + numPedido + ", pago=" + pago + ", codcliente=" + cliente.getNumCliente() + ", listaProductos=" + textolistaProductos() + '}';
     }
 
-    public void imprimirPedido() {
-
+    private String textolistaProductos(){
+        String texto="";
+        for(Producto o: listaProductos){
+            texto+=o.getReferencia() + "," + o.getCantidad() +",";
+        }
+        
+        return texto;
     }
 
     public Pedido realizarPedido(Empresa o) {
